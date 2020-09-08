@@ -1,13 +1,13 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """init a Flask web application"""
 
 from flask import Flask
 from models import storage
 from api.v1.views import app_views
-from flask import Blueprint
-app = Flask(__name__)
-app.register_blueprint(app_views)
 
+app = Flask(__name__)
+
+app.register_blueprint(app_views)
 
 @app.teardown_appcontext
 def close_db(self):
@@ -15,4 +15,4 @@ def close_db(self):
     storage.close()
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="5000", threaded=True)
+    app.run(host='0.0.0.0', port=5000, threaded=True)
