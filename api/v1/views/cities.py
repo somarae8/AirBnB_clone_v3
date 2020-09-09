@@ -43,6 +43,7 @@ def del_a_city(city_id=None):
         abort(404)
     storage.delete(fetched_obj)
     storage.save()
+    return (jsonify({}))
 
 
 @app_views.route("/states/<state_id>/cities", methods=["POST"],
