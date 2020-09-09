@@ -30,6 +30,7 @@ class BaseModel:
         """Initialization of the base model"""
         if kwargs:
             for key, value in kwargs.items():
+                
                 if key != "__class__":
                     setattr(self, key, value)
             if kwargs.get("created_at", None) and type(self.created_at) is str:
