@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """init a Flask web application"""
 
 from flask import Flask, jsonify
