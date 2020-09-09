@@ -74,7 +74,6 @@ def update_state(state_id=None):
         for k, v in update_s.items():
             setattr(get_state, k, v)
 
-        print(get_state.to_dict())
         storage.save()
     else:
         return abort(404)
