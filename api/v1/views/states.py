@@ -51,7 +51,7 @@ def add_state():
     if not request.get_json(silent=True):
         return jsonify({'error': 'Not a JSON'}), 400
 
-    if not 'name' in request.json:
+    if 'name' not in request.json:
         abort(400, 'Missing name')
 
     new_s = State()
