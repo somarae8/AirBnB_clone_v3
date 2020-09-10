@@ -16,7 +16,7 @@ def list_places_of_a_cities(city_id=None):
     city_obj = storage.get(City, city_id)
 
     if city_obj:
-        for obj in city_obj.cities:
+        for obj in city_obj.places:
             place_list.append(obj.to_dict())
         return jsonify(place_list)
     else:
