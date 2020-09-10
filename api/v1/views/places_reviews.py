@@ -14,12 +14,12 @@ from models.review import Review
 def list_views_of_a_place(place_id=None):
     """search views with place"""
     review_list = []
-    review_obj = storage.get(Review, place_id)
+    review_obj = storage.get(Place, place_id)
 
     if review_obj:
         for obj in review_obj.reviews:
             review_list.append(obj.to_dict())
-        return jsonify(place_list)
+        return jsonify(review_list)
     else:
         abort(404)
 
