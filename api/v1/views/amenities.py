@@ -38,13 +38,13 @@ def amenity(amenity_id=None):
 def del_amenity(amenity_id=None):
     """delete amenities"""
 
-    get_amenity = storage.get(amenity, amenity_id)
-    if get_amenity:
-        storage.delete(get_amenity)
+    amenities_id = storage.get(Amenity, amenity_id)
+    if amenities_id:
+        storage.delete(amenities_id)
         storage.save()
         return jsonify({}), 200
     else:
-        return abort(404)
+        abort(404)
 
 
 @app_views.route('/amenities', strict_slashes=False, methods=['POST'])
