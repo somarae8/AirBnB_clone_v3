@@ -72,6 +72,8 @@ def create_a_review(place_id=None):
         abort(404)
     if 'text' not in request.json:
         abort(400, 'Missing text')
+    if 'user_id' not in request.json:
+        abort(400, 'Missing user_id')
 
     review_new = Review(**data)
     review_new.place_id = place_id
