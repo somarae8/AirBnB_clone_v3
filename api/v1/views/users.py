@@ -5,7 +5,7 @@ Create view routes for users
 from api.v1.views import app_views
 from flask import Flask, jsonify, abort, request
 from models import storage
-from models.users import User
+from models.user import User
 
 
 @app_views.route('/users',
@@ -89,4 +89,4 @@ def update_user(user_id=None):
     else:
         abort(404)
 
-    return jsonify(get_amenity.to_dict()), 200
+    return jsonify(get_user.to_dict()), 200
