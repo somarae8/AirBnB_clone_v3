@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""routes of State """
+"""routes of City """
 from api.v1.views import app_views
 from flask import Flask, jsonify, abort, request
 from models import storage
