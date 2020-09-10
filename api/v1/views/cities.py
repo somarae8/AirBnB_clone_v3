@@ -70,11 +70,11 @@ def create_a_city(state_id=None):
 
 @app_views.route('/cities/<city_id>', strict_slashes=False,
                  methods=['PUT'])
-def update_cities(city_id):
+def update_cities(city_id=None):
     """Updates a City"""
     if city_id is None:
         abort(404)
-    json = request.get_json()
+    json = request.get_json(silent=True)
     if not json:
         return jsonify({'error': 'Not a JSON'}), 400
 
