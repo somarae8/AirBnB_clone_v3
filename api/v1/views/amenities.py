@@ -27,7 +27,7 @@ def amenity(amenity_id=None):
     if amenity_id:
         get_amenity = storage.get(Amenity, amenity_id)
 
-    if get_amenity is None:
+    if get_amenity:
         return abort(404)
 
     return jsonify(get_amenity.to_dict()), 200
@@ -82,9 +82,7 @@ def update_amenity(amenity_id=None):
         update_s = dict(request.get_json(silent=True))
         for k, v in update_s.items():
             setattr(get_amenity, k, v)
-
         storage.save()
+        return jsonify(get_amenity.to_dict()), 200
     else:
         abort(404)
-
-    return jsonify(get_amenity.to_dict()), 200
