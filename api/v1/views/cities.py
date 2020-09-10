@@ -22,7 +22,7 @@ def list_citys_of_a_states(state_id=None):
     return jsonify(city_list)
 
 
-@app_views.route('cities/<city_id>', strict_slashes=False, methods=['GET'])
+@app_views.route('/cities/<city_id>', strict_slashes=False, methods=['GET'])
 def list_a_city(city_id=None):
     """search a city with city_id"""
     if city_id:
@@ -33,7 +33,7 @@ def list_a_city(city_id=None):
     return jsonify(city_obj.to_dict())
 
 
-@app_views.route('cities/<city_id>', strict_slashes=False, methods=['DELETE'])
+@app_views.route('/cities/<city_id>', strict_slashes=False, methods=['DELETE'])
 def del_a_city(city_id=None):
     """delete cities with states_id"""
     if city_id:
@@ -41,25 +41,27 @@ def del_a_city(city_id=None):
 
     if city_obj is None:
         abort(404)
-    storage.delete(fetched_obj)
-    storage.save()
-    return (jsonify({}))
+    else:
+        storage.delete(city_obj)
+        storage.save()
+        return (jsonify({})), 200
 
 
 @app_views.route("/states/<state_id>/cities", methods=["POST"],
                  strict_slashes=False)
 def create_a_city(state_id=None):
     """create a city"""
-    if states_id is None:
+    if state_id is None:
         abort(404)
-    the_json = request.get_json(silent=True)
-    if the_json is None:
-        abort(400, 'Not a JSON')
 
-    elif 'name' not in json:
-        return jsonify({'error': 'Missing name'}), 400
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({'error': 'Not a JSON'}), 400
+
+    if 'name' not in request.json:
+        abort(400, 'Missing name')
     else:
-        city_new = City(**json_request)
+        city_new = City(**data)
         city_new.state_id = state_id
         storage.new(city_new)
         storage.save()
@@ -75,7 +77,8 @@ def update_cities(city_id):
     json = request.get_json()
     if not json:
         return jsonify({'error': 'Not a JSON'}), 400
-    cities_id = storage.get("City", city_id)
+
+    cities_id = storage.get(City, city_id)
     if cities_id:
         for key, value in json.items():
             setattr(cities_id, key, value)
