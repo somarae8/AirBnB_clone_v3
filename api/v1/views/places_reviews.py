@@ -38,7 +38,7 @@ def list_a_review(review_id=None):
 
 @app_views.route('/reviews/<review_id>', strict_slashes=False,
                  methods=['DELETE'])
-def del_a_place(review_id=None):
+def del_a_review(review_id=None):
     """delete review with review_id"""
     if review_id:
         review_obj = storage.get(Review, review_id)
@@ -83,8 +83,8 @@ def create_a_review(place_id=None):
 
 @app_views.route('/reviews/<review_id>', strict_slashes=False,
                  methods=['PUT'])
-def update_places(place_id=None):
-    """Updates a place"""
+def update_review(review_id=None):
+    """Updates a review"""
     if review_id is None:
         abort(404)
     json = request.get_json(silent=True)
